@@ -1,0 +1,22 @@
+---
+- name: Ensure group "docker" exists
+  group:
+    name: docker
+    state: present
+
+- name: Add vagrant user to docker group.
+  user:
+    name: vagrant
+    groups: docker
+    append: yes
+  become: yes
+
+- name: Install Docker
+  yum: "name={{item.name}} state={{item.state}}"
+  with_items:
+  - { name: docker, state: present }
+  - { name: docker-python, state: present }
+
+- name: Setup Docker Service
+  # service: name=docker state=restarted enabled=yes
+  systemd: name=docker state=restarted enabled=yes
