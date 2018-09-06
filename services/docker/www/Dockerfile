@@ -1,9 +1,8 @@
 FROM ubuntu:latest
-MAINTAINER John Rizzo <johnrizzo1@gmail.com>
 
 # Install Flask app dependencies.
 RUN apt-get update -y
-RUN apt-get install -y libmysqlclient-dev build-essential python-dev python-pip
+RUN apt-get install -y libmysqlclient-dev build-essential python-dev python-pip ansible
 RUN pip install flask flask-sqlalchemy mysql-python
 
 # Install playbook and run it.
